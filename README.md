@@ -12,10 +12,10 @@ Sprockets [PostCSS](https://github.com/postcss/postcss) extension with support f
 
 ### Rails
 
-Add `sprockets-postcss-essentials` to your `Gemfile`:
+Add `sprockets_postcss_essentials` to your `Gemfile`:
 
 ```ruby
-gem "sprockets-postcss-essentials", github: "vast/sprockets-postcss-essentials"
+gem "sprockets_postcss_essentials", github: "vast/sprockets-postcss-essentials"
 ```
 
 ### Sprockets
@@ -27,7 +27,7 @@ assets = Sprockets::Environment.new do |env|
   # ...
 end
 
-require "sprockets-postcss-essentials"
+require "sprockets_postcss_essentials"
 SprocketsPostcssEssentials.install(assets)
 ```
 
@@ -61,9 +61,9 @@ $footer-color: color(#03709a, blackness(+20%))
 
 .footer {
   @mixin clearfix; /* include mixin styles */
-  
+
   color: $footer-color;
-  
+
   &-logo {
     display: inline-block;
   }
