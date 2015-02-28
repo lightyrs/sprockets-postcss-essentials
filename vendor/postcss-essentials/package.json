@@ -15,5 +15,8 @@
     "postcss-mixins": "~0.1.1",
     "postcss-color-function": "~1.1.0",
     "postcss-nested": "~0.2.2"
+  },
+  "devDependencies": {
+    "browserify": "~9.0.3"
   }
 }
