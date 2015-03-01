@@ -1,4 +1,5 @@
-require "sprockets_postcss_essentials/version"
+require_relative "sprockets_postcss_essentials/version"
+require_relative "sprockets_postcss_essentials/processor"
 
 module SprocketsPostcssEssentials
 end
