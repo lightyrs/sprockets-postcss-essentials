@@ -11,7 +11,7 @@ module.exports = function(css, opts) {
     mixins,
     nested,
     simpleVars,
-    colorFunctions
+    colorFunctions()
   ]
 
   return postcss(processors).process(css, opts);
