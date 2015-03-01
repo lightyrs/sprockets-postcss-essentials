@@ -8,5 +8,5 @@ task default: :spec
 desc "Build postcss-essentials bundle"
 task :bundle do
   browserify = "vendor/postcss-essentials/node_modules/.bin/browserify"
-  system "#{browserify} -r./vendor/postcss-essentials/index.js:postcss-essentials > vendor/bundle.js"
+  system "#{browserify} ./vendor/postcss-essentials/index.js -s postcss_essentials > vendor/bundle.js"
 end

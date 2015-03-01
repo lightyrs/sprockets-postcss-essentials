@@ -25,8 +25,7 @@ module SprocketsPostcssEssentials
       end
 
       def process_proxy
-        "var essentials = require('postcss-essentials');
-        function process(css, opts) { return essentials(css, opts).css; }"
+        "function process(css, opts) { return postcss_essentials(css, opts).css; }"
       end
     end
   end

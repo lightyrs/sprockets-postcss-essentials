@@ -1,6 +1,26 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.postcss_essentials = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var postcss = require('postcss');
+var simpleVars = require('postcss-simple-vars');
+var postcssImport = require('postcss-import');
+var mixins = require('postcss-mixins');
+var nested = require('postcss-nested');
+var colorFunctions = require('postcss-color-function');
 
-},{}],2:[function(require,module,exports){
+module.exports = function(css, opts) {
+  var processors = [
+    postcssImport({ from: opts.from }),
+    mixins,
+    nested,
+    simpleVars,
+    colorFunctions()
+  ]
+
+  return postcss(processors).process(css, opts);
+}
+
+},{"postcss":46,"postcss-color-function":9,"postcss-import":22,"postcss-mixins":32,"postcss-nested":33,"postcss-simple-vars":34}],2:[function(require,module,exports){
+
+},{}],3:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -1312,7 +1332,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":3,"ieee754":4,"is-array":5}],3:[function(require,module,exports){
+},{"base64-js":4,"ieee754":5,"is-array":6}],4:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -1438,7 +1458,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -1524,7 +1544,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 
 /**
  * isArray
@@ -1559,7 +1579,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1787,7 +1807,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":7}],7:[function(require,module,exports){
+},{"_process":8}],8:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1846,7 +1866,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -1892,7 +1912,7 @@ function transformColor(string, source) {
   return string.slice(0, index) + colorFn.convert("color(" + balancedMatches.body + ")") + transformColor(balancedMatches.post)
 }
 
-},{"balanced-match":9,"css-color-function":12,"postcss-message-helpers":20}],9:[function(require,module,exports){
+},{"balanced-match":10,"css-color-function":13,"postcss-message-helpers":21}],10:[function(require,module,exports){
 module.exports = function(a, b, str) {
   var bal = 0;
   var m = {};
@@ -1918,7 +1938,7 @@ module.exports = function(a, b, str) {
 };
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 
 var Color = require('color');
 
@@ -2057,7 +2077,7 @@ function modify (val, amount, modifier) {
     default: return amount;
   }
 }
-},{"color":14}],11:[function(require,module,exports){
+},{"color":15}],12:[function(require,module,exports){
 
 var balanced = require('balanced-match');
 var Color = require('color');
@@ -2119,7 +2139,7 @@ function toRGB (ast) {
   return color.rgbString();
 }
 
-},{"./adjusters":10,"./parse":13,"balanced-match":9,"color":14}],12:[function(require,module,exports){
+},{"./adjusters":11,"./parse":14,"balanced-match":10,"color":15}],13:[function(require,module,exports){
 
 var convert = require('./convert');
 var parse = require('./parse');
@@ -2135,7 +2155,7 @@ exports.convert = convert;
  */
 
 exports.parse = parse;
-},{"./convert":11,"./parse":13}],13:[function(require,module,exports){
+},{"./convert":12,"./parse":14}],14:[function(require,module,exports){
 var balanced = require('balanced-match');
 var debug = require('debug')('css-color-function:parse');
 
@@ -2324,7 +2344,7 @@ function parse (string) {
 
   return fn();
 }
-},{"balanced-match":9,"debug":19}],14:[function(require,module,exports){
+},{"balanced-match":10,"debug":20}],15:[function(require,module,exports){
 /* MIT license */
 var convert = require("color-convert"),
     string = require("color-string");
@@ -2759,7 +2779,7 @@ Color.prototype.setChannel = function(space, index, val) {
 
 module.exports = Color;
 
-},{"color-convert":16,"color-string":17}],15:[function(require,module,exports){
+},{"color-convert":17,"color-string":18}],16:[function(require,module,exports){
 /* MIT license */
 
 module.exports = {
@@ -3452,7 +3472,7 @@ for (var key in cssKeywords) {
   reverseKeywords[JSON.stringify(cssKeywords[key])] = key;
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var conversions = require("./conversions");
 
 var convert = function() {
@@ -3545,7 +3565,7 @@ Converter.prototype.getValues = function(space) {
 });
 
 module.exports = convert;
-},{"./conversions":15}],17:[function(require,module,exports){
+},{"./conversions":16}],18:[function(require,module,exports){
 /* MIT license */
 var colorNames = require('color-name');
 
@@ -3765,7 +3785,7 @@ var reverseNames = {};
 for (var name in colorNames) {
    reverseNames[colorNames[name]] = name;
 }
-},{"color-name":18}],18:[function(require,module,exports){
+},{"color-name":19}],19:[function(require,module,exports){
 module.exports={
 	"aliceblue": [240, 248, 255],
 	"antiquewhite": [250, 235, 215],
@@ -3916,7 +3936,7 @@ module.exports={
 	"yellow": [255, 255, 0],
 	"yellowgreen": [154, 205, 50]
 }
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 
 /**
  * Expose `debug()` as the module.
@@ -4055,7 +4075,7 @@ try {
   if (window.localStorage) debug.enable(localStorage.debug);
 } catch(e){}
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /**
  * Constants
  */
@@ -4138,7 +4158,7 @@ function tryCatch(fn, source) {
   }
 }
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -4486,7 +4506,7 @@ function detach(node) {
 }
 
 }).call(this,require('_process'))
-},{"_process":7,"clone":22,"fs":1,"path":6,"postcss":45,"postcss-message-helpers":23,"resolve":24}],22:[function(require,module,exports){
+},{"_process":8,"clone":23,"fs":2,"path":7,"postcss":46,"postcss-message-helpers":24,"resolve":25}],23:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -4634,7 +4654,7 @@ clone.clonePrototype = function(parent) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":2}],23:[function(require,module,exports){
+},{"buffer":3}],24:[function(require,module,exports){
 /**
  * Constants
  */
@@ -4717,14 +4737,14 @@ function tryCatch(fn, source) {
   }
 }
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 var core = require('./lib/core');
 exports = module.exports = require('./lib/async');
 exports.core = core;
 exports.isCore = function (x) { return core[x] };
 exports.sync = require('./lib/sync');
 
-},{"./lib/async":25,"./lib/core":28,"./lib/sync":30}],25:[function(require,module,exports){
+},{"./lib/async":26,"./lib/core":29,"./lib/sync":31}],26:[function(require,module,exports){
 (function (process){
 var core = require('./core');
 var fs = require('fs');
@@ -4920,7 +4940,7 @@ module.exports = function resolve (x, opts, cb) {
 };
 
 }).call(this,require('_process'))
-},{"./caller.js":26,"./core":28,"./node-modules-paths.js":29,"_process":7,"fs":1,"path":6}],26:[function(require,module,exports){
+},{"./caller.js":27,"./core":29,"./node-modules-paths.js":30,"_process":8,"fs":2,"path":7}],27:[function(require,module,exports){
 module.exports = function () {
     // see https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi
     var origPrepareStackTrace = Error.prepareStackTrace;
@@ -4930,7 +4950,7 @@ module.exports = function () {
     return stack[2].getFileName();
 };
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 module.exports=[
     "assert",
     "buffer_ieee754",
@@ -4970,13 +4990,13 @@ module.exports=[
     "zlib"
 ]
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports = require('./core.json').reduce(function (acc, x) {
     acc[x] = true;
     return acc;
 }, {});
 
-},{"./core.json":27}],29:[function(require,module,exports){
+},{"./core.json":28}],30:[function(require,module,exports){
 (function (process){
 var path = require('path');
 
@@ -5016,7 +5036,7 @@ module.exports = function (start, opts) {
 }
 
 }).call(this,require('_process'))
-},{"_process":7,"path":6}],30:[function(require,module,exports){
+},{"_process":8,"path":7}],31:[function(require,module,exports){
 var core = require('./core');
 var fs = require('fs');
 var path = require('path');
@@ -5099,7 +5119,7 @@ module.exports = function (x, opts) {
     }
 };
 
-},{"./caller.js":26,"./core":28,"./node-modules-paths.js":29,"fs":1,"path":6}],31:[function(require,module,exports){
+},{"./caller.js":27,"./core":29,"./node-modules-paths.js":30,"fs":2,"path":7}],32:[function(require,module,exports){
 var postcss = require('postcss');
 var list    = require('postcss/lib/list');
 var vars    = require('postcss-simple-vars');
@@ -5224,7 +5244,7 @@ module.exports.postcss = function (css) {
     module.exports()(css);
 };
 
-},{"fs":1,"path":6,"postcss":45,"postcss-simple-vars":33,"postcss/lib/list":40}],32:[function(require,module,exports){
+},{"fs":2,"path":7,"postcss":46,"postcss-simple-vars":34,"postcss/lib/list":41}],33:[function(require,module,exports){
 var list = require('postcss/lib/list');
 
 var selector = function (parent, node) {
@@ -5295,7 +5315,7 @@ module.exports = function () {
 
 module.exports.postcss = process;
 
-},{"postcss/lib/list":40}],33:[function(require,module,exports){
+},{"postcss/lib/list":41}],34:[function(require,module,exports){
 var definition = function (variables, node) {
     var name = node.prop.slice(1);
     variables[name] = node.value;
@@ -5389,7 +5409,7 @@ module.exports.postcss = function (css) {
     module.exports()(css);
 };
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -5468,7 +5488,7 @@ var AtRule = (function (Container) {
 })(Container);
 
 module.exports = AtRule;
-},{"./container":36}],35:[function(require,module,exports){
+},{"./container":37}],36:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -5505,7 +5525,7 @@ var Comment = (function (Node) {
 })(Node);
 
 module.exports = Comment;
-},{"./node":42}],36:[function(require,module,exports){
+},{"./node":43}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -6071,7 +6091,7 @@ var Container = (function (Node) {
 })(Node);
 
 module.exports = Container;
-},{"./at-rule":34,"./comment":35,"./declaration":38,"./node":42,"./rule":49}],37:[function(require,module,exports){
+},{"./at-rule":35,"./comment":36,"./declaration":39,"./node":43,"./rule":50}],38:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -6163,7 +6183,7 @@ module.exports = CssSyntaxError;
 
 CssSyntaxError.prototype.name = "CssSyntaxError";
 }).call(this,require('_process'))
-},{"./previous-map":46,"_process":7,"path":6}],38:[function(require,module,exports){
+},{"./previous-map":47,"_process":8,"path":7}],39:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -6209,7 +6229,7 @@ var Declaration = (function (Node) {
 })(Node);
 
 module.exports = Declaration;
-},{"./node":42,"./vendor":51}],39:[function(require,module,exports){
+},{"./node":43,"./vendor":52}],40:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -6323,7 +6343,7 @@ var Input = (function () {
 })();
 
 module.exports = Input;
-},{"./css-syntax-error":37,"./parser":44,"./previous-map":46,"path":6}],40:[function(require,module,exports){
+},{"./css-syntax-error":38,"./parser":45,"./previous-map":47,"path":7}],41:[function(require,module,exports){
 "use strict";
 
 // Methods to parse list and split it to array
@@ -6399,7 +6419,7 @@ module.exports = {
     }
 
 };
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -6713,7 +6733,7 @@ var MapGenerator = (function () {
 })();
 
 module.exports = MapGenerator;
-},{"./result":47,"js-base64":52,"path":6,"source-map":53}],42:[function(require,module,exports){
+},{"./result":48,"js-base64":53,"path":7,"source-map":54}],43:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -7201,7 +7221,7 @@ var Node = (function () {
 })();
 
 module.exports = Node;
-},{"./css-syntax-error":37}],43:[function(require,module,exports){
+},{"./css-syntax-error":38}],44:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -7219,7 +7239,7 @@ module.exports = function (css, opts) {
 
     return parser.root;
 };
-},{"./input":39,"./parser":44}],44:[function(require,module,exports){
+},{"./input":40,"./parser":45}],45:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -7719,7 +7739,7 @@ var Parser = (function () {
 })();
 
 module.exports = Parser;
-},{"./at-rule":34,"./comment":35,"./declaration":38,"./root":48,"./rule":49,"./tokenize":50}],45:[function(require,module,exports){
+},{"./at-rule":35,"./comment":36,"./declaration":39,"./root":49,"./rule":50,"./tokenize":51}],46:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -7857,7 +7877,7 @@ postcss.root = function (defaults) {
 };
 
 module.exports = postcss;
-},{"./at-rule":34,"./comment":35,"./declaration":38,"./parse":43,"./result":47,"./root":48,"./rule":49}],46:[function(require,module,exports){
+},{"./at-rule":35,"./comment":36,"./declaration":39,"./parse":44,"./result":48,"./root":49,"./rule":50}],47:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -7966,7 +7986,7 @@ var PreviousMap = (function () {
 })();
 
 module.exports = PreviousMap;
-},{"fs":1,"js-base64":52,"path":6,"source-map":53}],47:[function(require,module,exports){
+},{"fs":2,"js-base64":53,"path":7,"source-map":54}],48:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -8031,7 +8051,7 @@ var Result = (function () {
 })();
 
 module.exports = Result;
-},{"./map-generator":41}],48:[function(require,module,exports){
+},{"./map-generator":42}],49:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -8131,7 +8151,7 @@ var Root = (function (Container) {
 })(Container);
 
 module.exports = Root;
-},{"./at-rule":34,"./comment":35,"./container":36,"./declaration":38,"./result":47,"./rule":49}],49:[function(require,module,exports){
+},{"./at-rule":35,"./comment":36,"./container":37,"./declaration":39,"./result":48,"./rule":50}],50:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -8186,7 +8206,7 @@ var Rule = (function (Container) {
 })(Container);
 
 module.exports = Rule;
-},{"./container":36,"./declaration":38,"./list":40}],50:[function(require,module,exports){
+},{"./container":37,"./declaration":39,"./list":41}],51:[function(require,module,exports){
 "use strict";
 
 var singleQuote = "'".charCodeAt(0),
@@ -8380,7 +8400,7 @@ module.exports = function (input) {
 
     return tokens;
 };
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 "use strict";
 
 // Methods to work with vendor prefixes
@@ -8413,7 +8433,7 @@ module.exports = {
     }
 
 };
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 (function (global){
 /*
  * $Id: base64.js,v 2.15 2014/04/05 12:58:57 dankogai Exp dankogai $
@@ -8610,7 +8630,7 @@ if (this['Meteor']) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"buffer":2}],53:[function(require,module,exports){
+},{"buffer":3}],54:[function(require,module,exports){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
  * Licensed under the New BSD license. See LICENSE.txt or:
@@ -8620,7 +8640,7 @@ exports.SourceMapGenerator = require('./source-map/source-map-generator').Source
 exports.SourceMapConsumer = require('./source-map/source-map-consumer').SourceMapConsumer;
 exports.SourceNode = require('./source-map/source-node').SourceNode;
 
-},{"./source-map/source-map-consumer":61,"./source-map/source-map-generator":62,"./source-map/source-node":63}],54:[function(require,module,exports){
+},{"./source-map/source-map-consumer":62,"./source-map/source-map-generator":63,"./source-map/source-node":64}],55:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -8719,7 +8739,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":64,"amdefine":65}],55:[function(require,module,exports){
+},{"./util":65,"amdefine":66}],56:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -8863,7 +8883,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./base64":56,"amdefine":65}],56:[function(require,module,exports){
+},{"./base64":57,"amdefine":66}],57:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -8907,7 +8927,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":65}],57:[function(require,module,exports){
+},{"amdefine":66}],58:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -9329,7 +9349,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":54,"./base64-vlq":55,"./binary-search":58,"./source-map-consumer":61,"./util":64,"amdefine":65}],58:[function(require,module,exports){
+},{"./array-set":55,"./base64-vlq":56,"./binary-search":59,"./source-map-consumer":62,"./util":65,"amdefine":66}],59:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -9411,7 +9431,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":65}],59:[function(require,module,exports){
+},{"amdefine":66}],60:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -9716,7 +9736,7 @@ define(function (require, exports, module) {
   exports.IndexedSourceMapConsumer = IndexedSourceMapConsumer;
 });
 
-},{"./basic-source-map-consumer":57,"./binary-search":58,"./source-map-consumer":61,"./util":64,"amdefine":65}],60:[function(require,module,exports){
+},{"./basic-source-map-consumer":58,"./binary-search":59,"./source-map-consumer":62,"./util":65,"amdefine":66}],61:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2014 Mozilla Foundation and contributors
@@ -9804,7 +9824,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":64,"amdefine":65}],61:[function(require,module,exports){
+},{"./util":65,"amdefine":66}],62:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -10028,7 +10048,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./basic-source-map-consumer":57,"./indexed-source-map-consumer":59,"./util":64,"amdefine":65}],62:[function(require,module,exports){
+},{"./basic-source-map-consumer":58,"./indexed-source-map-consumer":60,"./util":65,"amdefine":66}],63:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -10430,7 +10450,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":54,"./base64-vlq":55,"./mapping-list":60,"./util":64,"amdefine":65}],63:[function(require,module,exports){
+},{"./array-set":55,"./base64-vlq":56,"./mapping-list":61,"./util":65,"amdefine":66}],64:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -10846,7 +10866,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./source-map-generator":62,"./util":64,"amdefine":65}],64:[function(require,module,exports){
+},{"./source-map-generator":63,"./util":65,"amdefine":66}],65:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -11167,7 +11187,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":65}],65:[function(require,module,exports){
+},{"amdefine":66}],66:[function(require,module,exports){
 (function (process,__filename){
 /** vim: et:ts=4:sw=4:sts=4
  * @license amdefine 0.1.0 Copyright (c) 2011, The Dojo Foundation All Rights Reserved.
@@ -11470,24 +11490,5 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/vendor/postcss-essentials/node_modules/postcss/node_modules/source-map/node_modules/amdefine/amdefine.js")
-},{"_process":7,"path":6}],"postcss-essentials":[function(require,module,exports){
-var postcss = require('postcss');
-var simpleVars = require('postcss-simple-vars');
-var postcssImport = require('postcss-import');
-var mixins = require('postcss-mixins');
-var nested = require('postcss-nested');
-var colorFunctions = require('postcss-color-function');
-
-module.exports = function(css, opts) {
-  var processors = [
-    postcssImport({ from: opts.from }),
-    mixins,
-    nested,
-    simpleVars,
-    colorFunctions()
-  ]
-
-  return postcss(processors).process(css, opts);
-}
-
-},{"postcss":45,"postcss-color-function":8,"postcss-import":21,"postcss-mixins":31,"postcss-nested":32,"postcss-simple-vars":33}]},{},[]);
+},{"_process":8,"path":7}]},{},[1])(1)
+});
